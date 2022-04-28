@@ -20,6 +20,7 @@ public class App {
 
 	//loads the environment variables containing the api_keys
 	Dotenv dotenv = Dotenv.configure()
+			//enter the absolute path of your .env file here
 			.directory("C:\\Users\\andri\\Documents\\Netflix\\Workspace\\M15-FinalProject-Andriamasinoro-Mandresy\\src\\main\\resources\\.env")
 			.ignoreIfMalformed()
 			.ignoreIfMissing()
