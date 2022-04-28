@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### for API keys ###
+application-dev.properties
