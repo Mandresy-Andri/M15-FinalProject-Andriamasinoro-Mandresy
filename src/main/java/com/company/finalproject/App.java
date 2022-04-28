@@ -5,6 +5,7 @@ import com.company.finalproject.issAPI.IssResponse;
 import com.company.finalproject.weatherAPI.WeatherResponse;
 
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,6 +17,13 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class App {
+
+	//loads the environment variables containing the api_keys
+	Dotenv dotenv = Dotenv.configure()
+			.directory("C:\\Users\\andri\\Documents\\Netflix\\Workspace\\M15-FinalProject-Andriamasinoro-Mandresy\\src\\main\\resources\\.env")
+			.ignoreIfMalformed()
+			.ignoreIfMissing()
+			.load();
 
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
@@ -108,7 +116,7 @@ public class App {
 	//Returns a CoinResponse list from the cryptocurrency API based on the crypto symbol passed
 	//It is returned as an array and not an object because the json file defines it as an Array
 	private CoinResponse[] cryptoPrice(String crypto) {
-		WebClient coinClient = WebClient.create("https://rest.coinapi.io/v1/assets/"+crypto+"?apikey=61E86D0D-3ED1-4498-A9A3-45992BCA52D8");
+		WebClient coinClient = WebClient.create("https://rest.coinapi.io/v1/assets/"+crypto+"?apikey="+dotenv.get("CRYPTO_KEY"));
 		CoinResponse[] coinResponse = null;
 			try {
 				Mono<CoinResponse[]> response = coinClient
@@ -156,7 +164,7 @@ public class App {
 
 	//returns a WeatherResponse from the Weather API based on the city passed
 	private WeatherResponse cityWeather(String city) {
-		WebClient cityClient = WebClient.create("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=723fe5c47faf0450d6e9212d3824b8c3&units=imperial");
+		WebClient cityClient = WebClient.create("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+dotenv.get("WEATHER_KEY")+"&units=imperial");
 		WeatherResponse weatherResponse = null;
 		try {
 			Mono<WeatherResponse> response = cityClient
@@ -181,7 +189,7 @@ public class App {
 
 	//overloaded cityWeather method with latitude and longitude as parameters
 	private WeatherResponse cityWeather(String lat, String lon) {
-		WebClient cityClient = WebClient.create("https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=723fe5c47faf0450d6e9212d3824b8c3&units=imperial");
+		WebClient cityClient = WebClient.create("https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+dotenv.get("WEATHER_KEY")+"&units=imperial");
 		WeatherResponse weatherResponse = null;
 		try {
 			Mono<WeatherResponse> response = cityClient

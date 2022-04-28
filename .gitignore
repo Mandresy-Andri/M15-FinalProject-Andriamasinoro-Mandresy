@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### for API keys ###
-application-dev.properties
+.env
