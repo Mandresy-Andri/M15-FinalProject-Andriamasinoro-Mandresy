@@ -6,14 +6,5 @@ This is a command line program that interacts with various APIs. There are 4 opt
 3. Get the current location of the International Space Station and the weather of the city below it
 4. get the price of any crypto currency
 
-For API keys:
 
-To use the program, you need to get API Keys from the following websites: https://www.coinapi.io/ , https://openweathermap.org/api
-
-These keys must be put in an environment file (.env) and named in this way
-
-  CRYPTO_KEY=your key
-  
-  WEATHER_KEY=your key
-
-Finally, copy the absolute path of this .env file and put it as a parameter for the Dotenv object instantiation.
+The APIs can be found here: https://www.coinapi.io/ , https://openweathermap.org/api, http://open-notify.org/Open-Notify-API/
